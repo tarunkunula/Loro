@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Loro</title>
-<meta name="theme-color" content="#1B7F55">
+<meta name="theme-color" content="#1A9659">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -13,9 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --desk:#E3E9EE;--card:#FFFFFF;--rule:#DCE7F2;--margin:#D7475D;
-  --ink:#18232D;--ink-2:#55636F;--ink-3:#84929E;--line:#CBD5DD;--chip:#EEF2F5;
-  --accent:#2246C4;--on-accent:#FFFFFF;
+  --desk:#EEF4F0;--card:#FFFFFF;--rule:#DCE7F2;--margin:#D7475D;
+  --ink:#18232D;--ink-2:#55636F;--ink-3:#84929E;--line:#CBD5DD;--chip:#E1EBE5;--seg-on:#FFFFFF;
+  --accent:#1A9659;--accent-deep:#137044;--accent-soft:#E3F6EA;--on-accent:#FFFFFF;
+  --flame:#FF8A00;--bubble:#FFFFFF;
   --easy:#17804F;--medium:#2A62CF;--hard:#A86504;--wrong:#C42E3D;
   --shadow:0 1px 0 rgba(24,35,45,.06),0 14px 30px -18px rgba(24,35,45,.5);
   --shadow-sm:0 1px 2px rgba(24,35,45,.12);
@@ -30,8 +31,8 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --desk:#0E1820;--card:#18252F;--rule:#22364A;--margin:#E3647A;
-    --ink:#E7EDF2;--ink-2:#A2B0BB;--ink-3:#73828E;--line:#2C3E4C;--chip:#1F2E3A;
-    --accent:#86A2FF;--on-accent:#0E1820;
+    --ink:#E7EDF2;--ink-2:#A2B0BB;--ink-3:#73828E;--line:#2C3E4C;--chip:#1A2730;--seg-on:#2C3F4D;
+    --accent:#3DD68C;--accent-deep:#24995F;--accent-soft:#163326;--on-accent:#08110D;--flame:#FFA033;--bubble:#1F2E3A;
     --easy:#45C585;--medium:#7BA4FF;--hard:#E6A640;--wrong:#F26C78;
     --shadow:0 1px 0 rgba(0,0,0,.3),0 16px 30px -18px rgba(0,0,0,.8);
     --shadow-sm:0 1px 2px rgba(0,0,0,.4);
@@ -41,8 +42,8 @@
 }
 :root[data-theme="dark"]{
   --desk:#0E1820;--card:#18252F;--rule:#22364A;--margin:#E3647A;
-  --ink:#E7EDF2;--ink-2:#A2B0BB;--ink-3:#73828E;--line:#2C3E4C;--chip:#1F2E3A;
-  --accent:#86A2FF;--on-accent:#0E1820;
+  --ink:#E7EDF2;--ink-2:#A2B0BB;--ink-3:#73828E;--line:#2C3E4C;--chip:#1A2730;--seg-on:#2C3F4D;
+  --accent:#3DD68C;--accent-deep:#24995F;--accent-soft:#163326;--on-accent:#08110D;--flame:#FFA033;--bubble:#1F2E3A;
   --easy:#45C585;--medium:#7BA4FF;--hard:#E6A640;--wrong:#F26C78;
   --shadow:0 1px 0 rgba(0,0,0,.3),0 16px 30px -18px rgba(0,0,0,.8);
   --shadow-sm:0 1px 2px rgba(0,0,0,.4);
@@ -93,7 +94,8 @@ h3{font:700 15px/1.3 var(--text);color:var(--ink-2);margin:22px 0 10px}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
 .custom-size{display:flex;align-items:center;gap:8px;margin-top:10px}
 .custom-size input{width:96px;min-height:44px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);padding:0 12px;font-weight:700}
-.btn-primary{display:block;width:100%;min-height:56px;border:0;border-radius:10px;background:var(--accent);color:var(--on-accent);font:700 19px var(--display);margin-top:24px}
+.btn-primary{display:block;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--accent);color:var(--on-accent);font:800 19px var(--display);letter-spacing:.01em;margin-top:24px;box-shadow:0 4px 0 var(--accent-deep);transition:transform .08s,box-shadow .08s}
+.btn-primary:active{transform:translateY(3px);box-shadow:0 1px 0 var(--accent-deep)}
 .btn-primary:disabled{opacity:.45;cursor:default}
 .btn{min-height:46px;padding:0 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);font-weight:700}
 .btn-danger{color:var(--wrong)}
@@ -120,7 +122,7 @@ h3{font:700 15px/1.3 var(--text);color:var(--ink-2);margin:22px 0 10px}
 .type-row .btn{flex:1}
 .type-row .btn-primary{margin:0;flex:2;min-height:50px}
 .rates{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.rate{--c:var(--ink);min-height:72px;border:0;border-radius:10px;background:var(--card);color:var(--c);box-shadow:inset 0 3px 0 var(--c),var(--shadow-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 4px;font:700 17px/1.1 var(--display)}
+.rate{--c:var(--ink);min-height:72px;border:0;border-radius:14px;background:var(--card);color:var(--c);box-shadow:inset 0 3px 0 var(--c),var(--shadow-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 4px;font:700 17px/1.1 var(--display)}
 .rate small{font:400 12px/1.2 var(--text);color:var(--ink-2);margin-top:4px;text-align:center}
 .rate.easy{--c:var(--easy)}.rate.medium{--c:var(--medium)}.rate.hard{--c:var(--hard)}.rate.wrong{--c:var(--wrong)}
 .rate.suggested{outline:2.5px solid var(--c);outline-offset:2px}
@@ -182,6 +184,29 @@ nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px
 .nav-in button{flex:1;min-height:62px;background:none;border:0;color:var(--ink-3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:700 13px var(--text)}
 .nav-in svg{width:24px;height:24px}
 .nav-in button[aria-current="page"]{color:var(--accent)}
+/* home */
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:4px 0 6px}
+.brand h1{font:800 40px/1 var(--display);letter-spacing:-.03em;color:var(--accent);margin:0}
+.brand p{margin:6px 0 0;color:var(--ink-2);font-size:15px;font-weight:700}
+.streak{display:flex;align-items:center;gap:6px;padding:8px 14px 8px 10px;border-radius:999px;background:var(--card);box-shadow:var(--shadow-sm);font:800 20px var(--display);color:var(--ink-3);flex:none}
+.streak svg{width:24px;height:24px}
+.streak.on{color:var(--flame)}
+.hero{display:flex;flex-direction:column;align-items:center;margin:14px 0 6px}
+.bubble{position:relative;background:var(--bubble);border-radius:18px;padding:14px 18px;font:700 18px/1.35 var(--display);text-align:center;box-shadow:var(--shadow-sm);border:2px solid var(--line);max-width:300px}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-10px;width:16px;height:16px;background:var(--bubble);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.bubble b{color:var(--accent)}
+.parrot{width:132px;height:auto;margin-top:10px;animation:bob 3s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes bob{0%,100%{transform:rotate(0)}50%{transform:rotate(-3deg) translateY(-2px)}}
+.opt-label{font:800 14px var(--display);color:var(--ink-2);margin:18px 0 8px;letter-spacing:.02em}
+.seg{display:flex;background:var(--chip);border-radius:14px;padding:4px;gap:4px}
+.seg button{flex:1;min-height:46px;border:0;border-radius:11px;background:none;font:800 17px var(--display);color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--seg-on);color:var(--accent);box-shadow:var(--shadow-sm)}
+.toggle{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:700;color:var(--ink-2);font-size:15px}
+.toggle input{width:22px;height:22px;accent-color:var(--accent);flex:none}
+.ver{text-align:center;color:var(--ink-3);font-size:13px;margin:18px 0 0}
+.done-head{display:flex;align-items:center;gap:12px;margin:6px 0 16px}
+.done-head .parrot{width:72px;margin:0}
+.done-head h1{font:800 32px/1.05 var(--display);color:var(--accent);margin:0}
 #toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--card);padding:10px 16px;border-radius:10px;font-weight:700;font-size:15px;z-index:60;max-width:calc(100% - 32px);opacity:0;pointer-events:none;transition:opacity .2s}
 #toast.show{opacity:1}
 body.focus #toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
@@ -204,17 +229,16 @@ body.focus #toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
 'use strict';
 /* ---------- constants ---------- */
 const KEY = 'loro:v1';
+const APP_VERSION = 6;
 const BUCKETS = 16;
 const MAX_APPEAR = 5;          // most times one card can show in a session
-const BREAK_MS = 30 * 60 * 1000; // break that starts a new session
-const MIN_REVIEWS = 5;          // reviews needed for a session to count
 const IMPORT_SPREAD = 50;       // big studied imports spread this many per session
 const SPREAD_OVER = 100;        // only spread imports bigger than this
 
 /* ---------- state ---------- */
 function freshState(){
   return { v:1, cards:{}, meta:{ session:1, lastActive:0, sessionReviews:0, updatedAt:0 },
-           settings:{ size:20, newPer:5, mode:'recall' } };
+           settings:{ size:30, mode:'recall' } };
 }
 function normalizeState(s){
   const f = freshState();
@@ -223,7 +247,7 @@ function normalizeState(s){
     v:1,
     cards: (s.cards && typeof s.cards === 'object') ? s.cards : {},
     meta: Object.assign(f.meta, s.meta || {}),
-    settings: Object.assign(f.settings, s.settings || {})
+    settings: (st => { if (st.size === 10 || st.size === 20 || !(st.size >= 0)) st.size = 30; return st; })(Object.assign(f.settings, s.settings || {}))
   };
 }
 function loadLocal(){
@@ -325,10 +349,17 @@ const allCards = () => Object.values(state.cards);
 function dueList(){ const s = state.meta.session; return allCards().filter(c => c.status !== 'new' && c.due <= s).sort((a,b) => a.due - b.due || (b.lapses||0) - (a.lapses||0) || a.created - b.created); }
 function newList(){ return allCards().filter(c => c.status === 'new').sort((a,b) => a.created - b.created); }
 function aheadList(){ const s = state.meta.session; return allCards().filter(c => c.status !== 'new' && c.due > s).sort((a,b) => a.due - b.due || (b.lapses||0) - (a.lapses||0)); }
-function advanceSessionIfBreak(){
-  const m = state.meta;
-  if (m.sessionReviews >= MIN_REVIEWS && Date.now() - m.lastActive > BREAK_MS){ m.session++; m.sessionReviews = 0; touch([]); }
+function dayKey(d){ return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+function todayKey(){ return dayKey(new Date()); }
+function yesterdayKey(){ const d = new Date(); return dayKey(new Date(d.getFullYear(), d.getMonth(), d.getDate() - 1)); }
+function markPractised(){
+  const m = state.meta, t = todayKey();
+  if (m.lastDay === t) return;
+  m.streak = m.lastDay === yesterdayKey() ? (m.streak || 0) + 1 : 1;
+  m.lastDay = t;
 }
+function streakNow(){ const m = state.meta; return (m.lastDay === todayKey() || m.lastDay === yesterdayKey()) ? (m.streak || 0) : 0; }
+
 function makeCard(en, es, note, created, studied){
   return { id:newId(), en, es, note: note || '', created, status: studied ? 'seen' : 'new',
            gap:0, due: studied ? state.meta.session : 0, lapses:0, reviews:0 };
@@ -344,7 +375,7 @@ function pickVoice(){
 if ('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 function speak(text){
   if (!('speechSynthesis' in window)) return;
-  const u = new SpeechSynthesisUtterance(String(text).split(/[\/;]/)[0].trim());
+  const u = new SpeechSynthesisUtterance(String(text).replace(/\([^)]*\)/g, '').split(/[\/;]/)[0].trim());
   u.lang = esVoice ? esVoice.lang : 'es-MX'; if (esVoice) u.voice = esVoice; u.rate = 0.9;
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }
@@ -365,7 +396,7 @@ function checkAnswer(input, es){
   const u = norm(input); if (!u) return { kind:'blank' };
   const rank = { exact:0, accent:1, article:2, typo:3, gender:4, wrong:5 };
   let best = { kind:'wrong' };
-  for (const a of String(es).split(/\s*[\/;]\s*/).map(norm).filter(Boolean)){
+  for (const a of String(es).replace(/\([^)]*\)/g, '').split(/\s*[\/;]\s*/).map(norm).filter(Boolean)){
     let k = 'wrong';
     if (u === a) k = 'exact';
     else if (fold(u) === fold(a)) k = 'accent';
@@ -404,81 +435,91 @@ function render(){
   ({ home:renderHome, review:renderReview, summary:renderSummary, words:renderWords, import:renderImport, settings:renderSettings })[view]();
 }
 
-function renderHome(){
-  advanceSessionIfBreak();
-  const total = allCards().length;
-  if (!total){
-    app.innerHTML = `
-      <h1 class="title">Loro</h1>
-      <div class="stack"><article class="index">
-        <div class="head"><p class="prompt">Start your deck</p></div>
-        <div class="body"><p>Add words one at a time, or bring in the cards you already have in AnkiDroid.</p></div>
-      </article></div>
-      <div class="btn-row"><button class="btn" data-act="add">Add a word</button><button class="btn" data-act="go-import">Import words</button></div>`;
-    return;
-  }
-  const s = state.settings, due = dueList().length, nNew = Math.min(s.newPer, newList().length);
-  const ahead = aheadList().length;
-  if (!ahead) includeAhead = false;
-  const ready = due + nNew > 0 || includeAhead;
-  let line;
-  if (due && nNew) line = `${plural(due,'word')} to review and ${nNew} new ${nNew === 1 ? 'one' : 'ones'}.`;
-  else if (due) line = `${plural(due,'word')} to review.`;
-  else if (nNew) line = `${plural(nNew,'new word')} ready to learn.`;
-  else {
-    const m = state.meta, wait = Math.ceil((BREAK_MS - (Date.now() - m.lastActive)) / 60000);
-    line = (m.sessionReviews >= MIN_REVIEWS && wait > 0)
-      ? `You’re all caught up. The next session opens after a break, in about ${plural(wait,'minute')}.`
-      : 'You’re all caught up.';
-  }
-  const sizes = [10,20,50,0];
-  const isCustom = showCustom || (s.size && !sizes.includes(s.size));
-  app.innerHTML = `
-    <h1 class="title">Loro</h1>
-    <div class="stack"><article class="index">
-      <div class="head"><p class="kicker">Session ${state.meta.session}</p><p class="prompt">${ready ? 'Ready when you are' : 'Nice work'}</p></div>
-      <div class="body"><p>${line}</p>${ready ? `<p>This session: <b>${plural(plan('normal').length,'card')}</b></p>` : ''}</div>
-    </article></div>
-    ${ready ? `
-      <h3>How many cards</h3>
-      <div class="chips">
-        ${sizes.map(n => `<button class="chip" data-act="size" data-n="${n}" aria-pressed="${!isCustom && s.size === n}">${n || 'All'}</button>`).join('')}
-        <button class="chip" data-act="size-custom" aria-pressed="${isCustom}">Other</button>
-      </div>
-      ${ahead ? `<label class="check"><input type="checkbox" id="inc-ahead" ${includeAhead ? 'checked' : ''}><span>Include words that aren’t due yet<small>${plural(ahead,'word')} ${ahead === 1 ? 'is' : 'are'} scheduled for later sessions.</small></span></label>` : ''}
-      ${isCustom ? `<div class="custom-size"><input id="custom-n" type="number" inputmode="numeric" min="1" max="999" value="${s.size && !sizes.includes(s.size) ? s.size : ''}" aria-label="Number of cards" placeholder="35"><span>cards</span></div>` : ''}
-      <h3>How you answer</h3>
-      <div class="chips">
-        <button class="chip" data-act="mode" data-m="recall" aria-pressed="${s.mode === 'recall'}">In my head</button>
-        <button class="chip" data-act="mode" data-m="type" aria-pressed="${s.mode === 'type'}">Type it</button>
-      </div>
-      <button class="btn-primary" data-act="start">Start session</button>`
-    : `<div class="btn-row">
-        ${aheadList().length ? '<button class="btn" data-act="start-ahead">Review early</button>' : ''}
-        <button class="btn" data-act="add">Add a word</button>
-      </div>`}`;
+const nextS = () => state.meta.session + 1;
+// Weak = your last answer was Medium, Hard or Wrong (or a studied word you haven't rated yet).
+function isWeak(c){
+  if (c.status === 'new') return false;
+  if (!c.lastRating) return !(c.gap > 0);
+  return c.lastRating !== 'easy';
+}
+function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const byDue = (a,b) => a.due - b.due;
+const WEAK_RANK = { wrong:0, hard:1, medium:2 };
+function pools(S){
+  const all = allCards();
+  return {
+    fresh: shuffle(all.filter(c => c.status === 'new')),
+    weak: shuffle(all.filter(isWeak)).sort((a,b) => (WEAK_RANK[a.lastRating] ?? 2) - (WEAK_RANK[b.lastRating] ?? 2)),
+    easyDue: shuffle(all.filter(c => c.status !== 'new' && !isWeak(c) && c.due <= S)).sort(byDue),
+    later: shuffle(all.filter(c => c.status !== 'new' && !isWeak(c) && c.due > S)).sort(byDue)
+  };
+}
+// Picks new words first, then weak words (Wrong, then Hard, then Medium), then Easy words
+// whose break is over, then shuffles the picked cards so the order is random.
+function plan(kind, S){
+  const size = state.settings.size || Infinity;
+  const p = pools(S);
+  if (kind === 'ahead') return shuffle(p.later.slice(0, Math.min(size, 20)).map(c => c.id));
+  const order = [...p.fresh, ...p.weak, ...p.easyDue, ...(includeAhead ? p.later : [])];
+  return shuffle(order.slice(0, size).map(c => c.id));
 }
 
-function plan(kind){
-  const size = state.settings.size || Infinity;
-  if (kind === 'ahead') return aheadList().slice(0, Math.min(size, 20)).map(c => c.id);
-  const due = dueList(), fresh = newList();
-  const nNew = Math.min(state.settings.newPer, fresh.length, size);
-  const nDue = Math.min(due.length, size - nNew);
-  let out = due.slice(0, nDue).map(c => c.id);
-  if (includeAhead && kind === 'normal'){
-    const room = size - nNew - out.length;
-    if (room > 0) out = out.concat(aheadList().slice(0, room).map(c => c.id));
+const PARROT = '<svg class="parrot" viewBox="0 0 120 132" aria-hidden="true"><path d="M50 100 L40 128 L56 119 L61 130 L70 101 Z" fill="#178A51"/><ellipse cx="58" cy="80" rx="31" ry="34" fill="#2DB86E"/><path d="M30 68 Q24 100 50 108 Q42 88 46 66 Z" fill="#178A51"/><ellipse cx="64" cy="88" rx="17" ry="21" fill="#9BE6B4"/><path d="M46 22 Q46 4 58 12 Q62 0 72 10 Q80 4 80 18 Z" fill="#2DB86E"/><circle cx="60" cy="42" r="28" fill="#2DB86E"/><ellipse cx="71" cy="43" rx="15" ry="14" fill="#EAFBF0"/><circle cx="71" cy="40" r="6.5" fill="#18232D"/><circle cx="73.5" cy="37.5" r="2.3" fill="#fff"/><circle cx="64" cy="53" r="3.6" fill="#FF8FA3" opacity=".65"/><path d="M78 44 Q97 41 95 61 Q89 54 79 56 Z" fill="#FFB020"/><path d="M79 56 Q87 56 89 60 Q84 65 78 60 Z" fill="#DE8700"/><path d="M50 112 v8 M58 112 v8 M66 112 v8" stroke="#FFB020" stroke-width="4.5" stroke-linecap="round"/><path d="M38 121 H82" stroke="#8B5A2B" stroke-width="5" stroke-linecap="round"/></svg>';
+const FLAME = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.5 3.2-1.2 5-2.6 6.6C8 10.2 7 11.7 7 14a5 5 0 0 0 10 0c0-1.6-.6-3-1.5-4.1.1 1.5-.5 2.6-1.5 3 .4-2.9-.6-6.6-2-10.9z"/></svg>';
+
+function renderHome(){
+  const st = streakNow(), on = state.meta.lastDay === todayKey();
+  const top = `<header class="top">
+      <div class="brand"><h1>Loro</h1><p>Master Spanish, one word at a time</p></div>
+      <div class="streak${on ? ' on' : ''}" aria-label="${plural(st,'day')} in a row">${FLAME}${st}</div>
+    </header>`;
+  const total = allCards().length;
+  if (!total){
+    app.innerHTML = `${top}
+      <section class="hero"><div class="bubble">¡Hola! Let’s add your first words.</div>${PARROT}</section>
+      <div class="btn-row"><button class="btn" data-act="add">Add a word</button><button class="btn" data-act="go-import">Import words</button></div>
+      <p class="ver">Version ${APP_VERSION}</p>`;
+    return;
   }
-  const n = fresh.slice(0, nNew).map(c => c.id);
-  const total = out.length + n.length;
-  n.forEach((id, i) => out.splice(Math.min(out.length, Math.round((i + 0.5) * total / n.length)), 0, id));
-  return out;
+  const s = state.settings, S = nextS(), p = pools(S);
+  if (!p.later.length) includeAhead = false;
+  const ready = p.fresh.length + p.weak.length + p.easyDue.length > 0 || includeAhead;
+  if (!ready){
+    app.innerHTML = `${top}
+      <section class="hero"><div class="bubble">¡Muy bien! Every word is on an Easy break.</div>${PARROT}</section>
+      <button class="btn-primary" data-act="start-ahead">Review early</button>
+      <p class="ver">Version ${APP_VERSION}</p>`;
+    return;
+  }
+  const count = plan('normal', S).length, nNew = Math.min(p.fresh.length, count);
+  const sizes = [[30,'30'],[50,'50'],[0,'All']];
+  const isCustom = showCustom || !sizes.some(([n]) => n === s.size);
+  app.innerHTML = `${top}
+    <section class="hero">
+      <div class="bubble">¡Vamos! <b>${plural(count,'card')}</b>${nNew ? `, ${nNew} new` : ''}.</div>
+      ${PARROT}
+    </section>
+    <div class="opt-label">Cards</div>
+    <div class="seg" role="group" aria-label="Cards">
+      ${sizes.map(([n,l]) => `<button data-act="size" data-n="${n}" aria-pressed="${!isCustom && s.size === n}">${l}</button>`).join('')}
+      <button data-act="size-custom" aria-pressed="${isCustom}">Other</button>
+    </div>
+    ${isCustom ? `<div class="custom-size"><input id="custom-n" type="number" inputmode="numeric" min="1" max="999" value="${s.size > 0 && !sizes.some(([n]) => n === s.size) ? s.size : ''}" aria-label="Number of cards" placeholder="40"><span>cards</span></div>` : ''}
+    ${p.later.length ? `<label class="toggle"><input type="checkbox" id="inc-ahead" ${includeAhead ? 'checked' : ''}>Add words on an Easy break (${p.later.length})</label>` : ''}
+    <div class="opt-label">Answer</div>
+    <div class="seg" role="group" aria-label="Answer">
+      <button data-act="mode" data-m="recall" aria-pressed="${s.mode === 'recall'}">In my head</button>
+      <button data-act="mode" data-m="type" aria-pressed="${s.mode === 'type'}">Type it</button>
+    </div>
+    <button class="btn-primary" data-act="start">Start new session</button>
+    <p class="ver">Version ${APP_VERSION}</p>`;
 }
+
 function startSession(kind){
-  advanceSessionIfBreak();
-  const q = plan(kind);
+  const S = nextS();
+  const q = plan(kind, S);
   if (!q.length){ toast('Nothing to review right now.'); render(); return; }
+  state.meta.session = S; state.meta.sessionReviews = 0; touch([]);
   includeAhead = false;
   session = { queue:q, idx:0, appear:{}, missed:new Set(), stats:{easy:0,medium:0,hard:0,wrong:0},
               started:Date.now(), mode:state.settings.mode, revealed:false, result:null, typed:'' };
@@ -507,8 +548,8 @@ function renderReview(){
   if (s.revealed){
     controls = `<div class="rates">
       <button class="rate easy${sugg==='easy'?' suggested':''}" data-act="rate" data-r="easy">Easy<small>${easyGap ? 'skip ' + easyGap : 'next session'}</small></button>
-      <button class="rate medium" data-act="rate" data-r="medium">Medium<small>next session</small></button>
-      <button class="rate hard${sugg==='hard'?' suggested':''}" data-act="rate" data-r="hard">Hard<small>end of this one</small></button>
+      <button class="rate medium" data-act="rate" data-r="medium">Medium<small>next time</small></button>
+      <button class="rate hard${sugg==='hard'?' suggested':''}" data-act="rate" data-r="hard">Hard<small>again soon</small></button>
       <button class="rate wrong${sugg==='wrong'?' suggested':''}" data-act="rate" data-r="wrong">Wrong<small>2 more times</small></button>
     </div>`;
   } else if (typing){
@@ -573,6 +614,8 @@ function rate(r){
       if (s.appear[id] + 1 < MAX_APPEAR) s.queue.push(id);
     }
   }
+  c.lastRating = (s.missed.has(id) && r === 'easy') ? 'medium' : r;
+  markPractised();
   c.last = Date.now();
   state.meta.sessionReviews++; state.meta.lastActive = Date.now();
   touch([id]);
@@ -599,7 +642,7 @@ function renderSummary(){
   const missed = [...s.missed].map(id => state.cards[id]).filter(Boolean);
   const seg = k => total ? `<span style="width:${st[k]/total*100}%;background:var(--${k})"></span>` : '';
   app.innerHTML = `
-    <h1 class="title">Session done</h1>
+    <div class="done-head">${PARROT}<h1>${st.wrong === 0 && total ? '¡Perfecto!' : '¡Muy bien!'}</h1></div>
     <article class="index">
       <div class="head"><p class="prompt">${plural(total,'card')} in ${plural(mins,'minute')}</p></div>
       <div class="body">
@@ -617,9 +660,10 @@ function renderSummary(){
 
 function statusOf(c){
   if (c.status === 'new') return ['New',''];
-  const n = c.due - state.meta.session;
-  if (n <= 0) return ['Due now','due'];
-  return ['In ' + plural(n,'session'), ''];
+  if (isWeak(c)) return ['Practise','due'];
+  const n = c.due - nextS();
+  if (n <= 0) return ['Ready',''];
+  return ['Easy break: ' + plural(n,'session'), ''];
 }
 function renderWords(){
   const n = allCards().length;
@@ -782,7 +826,7 @@ function renderImport(){
           <tbody>${pairs.slice(0,8).map(p => `<tr><td>${esc(p.en)}</td><td>${esc(p.es)}</td></tr>`).join('')}</tbody></table></div>
         ${pairs.length > 8 ? `<p class="help">and ${pairs.length - 8} more</p>` : ''}
         <label class="check"><input type="checkbox" id="imp-swap" ${imp.swap ? 'checked' : ''}><span>Flip the columns<small>Use this if English and Spanish look swapped above.</small></span></label>
-        <label class="check"><input type="checkbox" id="imp-studied" ${imp.studied ? 'checked' : ''}><span>I’ve studied these before<small>They go straight into reviews. Lists over ${SPREAD_OVER} words get spread across a few sessions. Leave this off to learn them as new words, ${state.settings.newPer} per session.</small></span></label>
+        <label class="check"><input type="checkbox" id="imp-studied" ${imp.studied ? 'checked' : ''}><span>I’ve studied these before<small>They go straight into reviews. Lists over ${SPREAD_OVER} words get spread across a few sessions. Leave this off to learn them as new words, which always come first in a session.</small></span></label>
         <button class="btn-primary" data-act="imp-go">Add ${plural(pairs.length,'word')}</button>`
       : `<h2>Nothing new to add</h2><p class="help">${imp.rows.length ? 'Every word in this list is already in your deck.' : 'I couldn’t find any English and Spanish pairs. Check that each line has both words.'}</p>`}
     </div>` : ''}
@@ -807,11 +851,6 @@ function renderSettings(){
   app.innerHTML = `
     <h1 class="title">Settings</h1>
     <div class="panel">
-      <h2>New words per session</h2>
-      <p class="help">How many words you haven’t seen before get mixed into each session.</p>
-      <div class="stepper"><button data-act="newper" data-d="-1" aria-label="Fewer">−</button><output>${s.newPer}</output><button data-act="newper" data-d="1" aria-label="More">+</button></div>
-    </div>
-    <div class="panel">
       <h2>How the buttons work</h2>
       <dl class="rules">
         <dt class="dt-easy">Easy</dt><dd>You knew it right away. It skips your next 3 sessions. Each time you press Easy again, the gap doubles: 3, 6, 12, 24 and so on.</dd>
@@ -819,14 +858,15 @@ function renderSettings(){
         <dt class="dt-hard">Hard</dt><dd>You barely got it. It comes back at the end of this session.</dd>
         <dt class="dt-wrong">Wrong</dt><dd>You missed it. It comes back twice more in this session and again next session, and its gap starts over.</dd>
       </dl>
-      <p class="help" style="margin-top:14px">A new session starts when you come back after a break of 30 minutes or more, as long as you reviewed at least ${MIN_REVIEWS} cards last time. You’re on session ${state.meta.session}.</p>
+      <p class="help" style="margin-top:14px">A new session starts every time you tap Start new session. Each session shows your new words first, then words you last marked Wrong, Hard or Medium, then words you knew whose break is over, if there’s room. The order is shuffled every time. You’ve started ${plural(state.meta.session - 1,'session')} so far.</p>
     </div>
     <div class="panel">
       <h2>Your data</h2>
       <p class="status" id="sync-status"></p>
       <div class="btn-row"><button class="btn" data-act="backup">Download backup</button><label class="btn" style="display:inline-flex;align-items:center;justify-content:center">Restore backup<input id="restore-file" type="file" accept=".json,application/json" hidden></label></div>
       <div class="btn-row"><button class="btn btn-danger" data-act="erase">Erase everything</button></div>
-    </div>`;
+    </div>
+    <p class="help" style="text-align:center;margin-top:18px">Loro version ${APP_VERSION}</p>`;
   setSync(sync.status);
 }
 async function backup(){
@@ -913,7 +953,7 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('input', e => {
   if (e.target.id === 'q'){ wordQuery = e.target.value; renderWordList(); }
-  if (e.target.id === 'custom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ state.settings.size = n; touch([]); const b = document.querySelector('#app .body b'); if (b) b.textContent = plural(plan('normal').length,'card'); } }
+  if (e.target.id === 'custom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ state.settings.size = n; touch([]); const b = document.querySelector('#app .body b'); if (b){ const n2 = plan('normal', nextS()).length; b.textContent = plural(n2,'card'); } } }
   if (e.target.id === 'inc-ahead'){ includeAhead = e.target.checked; render(); }
   if (e.target.id === 'imp-swap' && imp){ imp.swap = e.target.checked; renderImport(); }
   if (e.target.id === 'imp-studied' && imp){ imp.studied = e.target.checked; }

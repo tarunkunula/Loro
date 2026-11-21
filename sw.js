@@ -1,5 +1,5 @@
 // Loro offline support: keeps the app working without internet.
-const CACHE = 'loro-v2';
+const CACHE = 'loro-v6';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -23,7 +23,7 @@ self.addEventListener('fetch', e => {
     if (req.mode === 'navigate'){
       // Try the network first so updates arrive; fall back to the saved copy offline.
       e.respondWith(
-        fetch(req).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); return r; })
+        fetch(req.url, { cache:'no-cache' }).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); return r; })
           .catch(() => caches.match('./index.html'))
       );
       return;
