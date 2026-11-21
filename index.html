@@ -208,7 +208,8 @@ const BUCKETS = 16;
 const MAX_APPEAR = 5;          // most times one card can show in a session
 const BREAK_MS = 30 * 60 * 1000; // break that starts a new session
 const MIN_REVIEWS = 5;          // reviews needed for a session to count
-const IMPORT_SPREAD = 30;       // studied imports spread this many per session
+const IMPORT_SPREAD = 50;       // big studied imports spread this many per session
+const SPREAD_OVER = 100;        // only spread imports bigger than this
 
 /* ---------- state ---------- */
 function freshState(){
@@ -390,6 +391,7 @@ let view = 'home';
 let session = null;
 let undoSnap = null;
 let showCustom = false;
+let includeAhead = false;
 let wordQuery = '';
 let imp = null;
 
@@ -416,7 +418,9 @@ function renderHome(){
     return;
   }
   const s = state.settings, due = dueList().length, nNew = Math.min(s.newPer, newList().length);
-  const ready = due + nNew > 0;
+  const ahead = aheadList().length;
+  if (!ahead) includeAhead = false;
+  const ready = due + nNew > 0 || includeAhead;
   let line;
   if (due && nNew) line = `${plural(due,'word')} to review and ${nNew} new ${nNew === 1 ? 'one' : 'ones'}.`;
   else if (due) line = `${plural(due,'word')} to review.`;
@@ -433,7 +437,7 @@ function renderHome(){
     <h1 class="title">Loro</h1>
     <div class="stack"><article class="index">
       <div class="head"><p class="kicker">Session ${state.meta.session}</p><p class="prompt">${ready ? 'Ready when you are' : 'Nice work'}</p></div>
-      <div class="body"><p>${line}</p></div>
+      <div class="body"><p>${line}</p>${ready ? `<p>This session: <b>${plural(plan('normal').length,'card')}</b></p>` : ''}</div>
     </article></div>
     ${ready ? `
       <h3>How many cards</h3>
@@ -441,6 +445,7 @@ function renderHome(){
         ${sizes.map(n => `<button class="chip" data-act="size" data-n="${n}" aria-pressed="${!isCustom && s.size === n}">${n || 'All'}</button>`).join('')}
         <button class="chip" data-act="size-custom" aria-pressed="${isCustom}">Other</button>
       </div>
+      ${ahead ? `<label class="check"><input type="checkbox" id="inc-ahead" ${includeAhead ? 'checked' : ''}><span>Include words that aren’t due yet<small>${plural(ahead,'word')} ${ahead === 1 ? 'is' : 'are'} scheduled for later sessions.</small></span></label>` : ''}
       ${isCustom ? `<div class="custom-size"><input id="custom-n" type="number" inputmode="numeric" min="1" max="999" value="${s.size && !sizes.includes(s.size) ? s.size : ''}" aria-label="Number of cards" placeholder="35"><span>cards</span></div>` : ''}
       <h3>How you answer</h3>
       <div class="chips">
@@ -460,7 +465,11 @@ function plan(kind){
   const due = dueList(), fresh = newList();
   const nNew = Math.min(state.settings.newPer, fresh.length, size);
   const nDue = Math.min(due.length, size - nNew);
-  const out = due.slice(0, nDue).map(c => c.id);
+  let out = due.slice(0, nDue).map(c => c.id);
+  if (includeAhead && kind === 'normal'){
+    const room = size - nNew - out.length;
+    if (room > 0) out = out.concat(aheadList().slice(0, room).map(c => c.id));
+  }
   const n = fresh.slice(0, nNew).map(c => c.id);
   const total = out.length + n.length;
   n.forEach((id, i) => out.splice(Math.min(out.length, Math.round((i + 0.5) * total / n.length)), 0, id));
@@ -470,6 +479,7 @@ function startSession(kind){
   advanceSessionIfBreak();
   const q = plan(kind);
   if (!q.length){ toast('Nothing to review right now.'); render(); return; }
+  includeAhead = false;
   session = { queue:q, idx:0, appear:{}, missed:new Set(), stats:{easy:0,medium:0,hard:0,wrong:0},
               started:Date.now(), mode:state.settings.mode, revealed:false, result:null, typed:'' };
   undoSnap = null; view = 'review'; render();
@@ -772,7 +782,7 @@ function renderImport(){
           <tbody>${pairs.slice(0,8).map(p => `<tr><td>${esc(p.en)}</td><td>${esc(p.es)}</td></tr>`).join('')}</tbody></table></div>
         ${pairs.length > 8 ? `<p class="help">and ${pairs.length - 8} more</p>` : ''}
         <label class="check"><input type="checkbox" id="imp-swap" ${imp.swap ? 'checked' : ''}><span>Flip the columns<small>Use this if English and Spanish look swapped above.</small></span></label>
-        <label class="check"><input type="checkbox" id="imp-studied" ${imp.studied ? 'checked' : ''}><span>I’ve studied these before<small>They go straight into reviews, spread across your next sessions. Leave this off to learn them as new words, ${state.settings.newPer} per session.</small></span></label>
+        <label class="check"><input type="checkbox" id="imp-studied" ${imp.studied ? 'checked' : ''}><span>I’ve studied these before<small>They go straight into reviews. Lists over ${SPREAD_OVER} words get spread across a few sessions. Leave this off to learn them as new words, ${state.settings.newPer} per session.</small></span></label>
         <button class="btn-primary" data-act="imp-go">Add ${plural(pairs.length,'word')}</button>`
       : `<h2>Nothing new to add</h2><p class="help">${imp.rows.length ? 'Every word in this list is already in your deck.' : 'I couldn’t find any English and Spanish pairs. Check that each line has both words.'}</p>`}
     </div>` : ''}
@@ -783,7 +793,7 @@ function runImport(){
   const base = Date.now(), studied = imp.studied;
   pairs.forEach((p, i) => {
     const c = makeCard(p.en, p.es, p.note, base + i, studied);
-    if (studied) c.due = state.meta.session + Math.floor(i / IMPORT_SPREAD);
+    if (studied && pairs.length > SPREAD_OVER) c.due = state.meta.session + Math.floor(i / IMPORT_SPREAD);
     state.cards[c.id] = c;
   });
   touch('all');
@@ -903,7 +913,8 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('input', e => {
   if (e.target.id === 'q'){ wordQuery = e.target.value; renderWordList(); }
-  if (e.target.id === 'custom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ state.settings.size = n; touch([]); } }
+  if (e.target.id === 'custom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ state.settings.size = n; touch([]); const b = document.querySelector('#app .body b'); if (b) b.textContent = plural(plan('normal').length,'card'); } }
+  if (e.target.id === 'inc-ahead'){ includeAhead = e.target.checked; render(); }
   if (e.target.id === 'imp-swap' && imp){ imp.swap = e.target.checked; renderImport(); }
   if (e.target.id === 'imp-studied' && imp){ imp.studied = e.target.checked; }
   if (e.target.id === 'imp-text' && imp){ imp.text = e.target.value; }
