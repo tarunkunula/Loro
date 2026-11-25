@@ -1,5 +1,5 @@
 // Loro offline support: keeps the app working without internet.
-const CACHE = 'loro-v7';
+const CACHE = 'loro-v8';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

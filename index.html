@@ -184,6 +184,38 @@ nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px
 .nav-in button{flex:1;min-height:62px;background:none;border:0;color:var(--ink-3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:700 13px var(--text)}
 .nav-in svg{width:24px;height:24px}
 .nav-in button[aria-current="page"]{color:var(--accent)}
+/* progress */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 14px}
+.tile{background:var(--card);border-radius:14px;box-shadow:var(--shadow-sm);padding:14px 16px}
+.tile b{display:block;font:800 26px/1.1 var(--display);letter-spacing:-.01em}
+.tile span{display:block;color:var(--ink-2);font-size:14px;margin-top:4px}
+.mixrow+.mixrow{margin-top:18px}
+.mixhead{display:flex;justify-content:space-between;font-size:15px}
+.mixhead span{color:var(--ink-3)}
+.mixrow .bar{margin:8px 0 6px}
+.mixleg{display:flex;gap:14px;flex-wrap:wrap;color:var(--ink-2);font-size:14px}
+.mixleg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.wk{display:grid;grid-template-columns:104px 1fr 44px;align-items:center;gap:10px;margin:10px 0;font-size:15px;color:var(--ink-2)}
+.wk small{display:block;color:var(--ink-3);font-size:12px;line-height:1.2}
+.wk .track{height:10px;background:var(--chip);border-radius:5px;overflow:hidden}
+.wk .track i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.wk b{text-align:right;color:var(--ink)}
+.panel .row{padding:10px 0}
+.panel div.row{cursor:default}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-head .icon-btn{width:38px;height:38px;box-shadow:none;background:var(--chip)}
+.cal-head .icon-btn:disabled{opacity:.35;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
+.cal-w{font-size:12px;color:var(--ink-3);font-weight:700}
+.cal-d{aspect-ratio:1;display:grid;place-items:center;border-radius:50%;font-size:14px;color:var(--ink-2)}
+.cal-d.did{background:var(--accent);color:var(--on-accent);font-weight:800}
+.cal-d.today{outline:2px solid var(--flame);outline-offset:1px}
+.deck-seg{margin-top:16px}
+.vrow{display:grid;grid-template-columns:112px 1fr;gap:10px;align-items:center;margin:6px 0}
+.vrow label{font-size:14px;color:var(--ink-2);font-weight:700;line-height:1.2}
+.vrow .field{min-height:44px;padding:6px 12px;font:700 17px var(--display)}
+.mine{color:var(--accent);font-weight:700;font-size:13px}
+.nav-in button{font-size:12px}
 /* verbs */
 .pill{display:inline-block;font:800 14px/1 var(--display);color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:6px 10px;margin:0 8px 8px 0}
 .vtable{border-collapse:collapse;width:100%;line-height:32px}
@@ -216,6 +248,8 @@ nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px
 .bubble{position:relative;background:var(--bubble);border-radius:18px;padding:14px 18px;font:700 18px/1.35 var(--display);text-align:center;box-shadow:var(--shadow-sm);border:2px solid var(--line);max-width:300px}
 .bubble::after{content:"";position:absolute;left:50%;bottom:-10px;width:16px;height:16px;background:var(--bubble);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateX(-50%) rotate(45deg)}
 .bubble b{color:var(--accent)}
+.bubble .b1,.bubble .b2{display:block}
+.bubble .b2{font-size:17px;margin-top:2px}
 .parrot{width:132px;height:auto;margin-top:10px;animation:bob 3s ease-in-out infinite;transform-origin:50% 100%}
 @keyframes bob{0%,100%{transform:rotate(0)}50%{transform:rotate(-3deg) translateY(-2px)}}
 .opt-label{font:800 14px var(--display);color:var(--ink-2);margin:18px 0 8px;letter-spacing:.02em}
@@ -241,6 +275,7 @@ body.focus #toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
     <button data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="15" height="13" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v10"/></svg>Study</button>
     <button data-nav="words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/></svg>Words</button>
     <button data-nav="verbs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 14.5h18M10 4v16"/></svg>Verbs</button>
+    <button data-nav="progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>Progress</button>
     <button data-nav="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Settings</button>
   </div>
 </nav>
@@ -251,7 +286,7 @@ body.focus #toast{bottom:calc(24px + env(safe-area-inset-bottom,0px))}
 'use strict';
 /* ---------- constants ---------- */
 const KEY = 'loro:v1';
-const APP_VERSION = 7;
+const APP_VERSION = 8;
 const BUCKETS = 16;
 const MAX_APPEAR = 5;          // most times one card can show in a session
 const IMPORT_SPREAD = 50;       // big studied imports spread this many per session
@@ -260,7 +295,13 @@ const SPREAD_OVER = 100;        // only spread imports bigger than this
 /* ---------- state ---------- */
 function freshState(){
   return { v:1, cards:{}, meta:{ session:1, lastActive:0, sessionReviews:0, updatedAt:0 },
-           settings:{ size:30, mode:'recall' } };
+           settings:{ size:30, vsize:30, mode:'recall', deck:'word' }, stats:freshStats() };
+}
+function freshStats(){ return { days:{}, total:{ ms:0, n:0, sess:0 } }; }
+function normStats(x){
+  const f = freshStats();
+  if (!x || typeof x !== 'object') return f;
+  return { days:(x.days && typeof x.days === 'object') ? x.days : {}, total:Object.assign(f.total, x.total || {}) };
 }
 function normalizeState(s){
   const f = freshState();
@@ -269,7 +310,8 @@ function normalizeState(s){
     v:1,
     cards: (s.cards && typeof s.cards === 'object') ? s.cards : {},
     meta: Object.assign(f.meta, s.meta || {}),
-    settings: (st => { if (st.size === 10 || st.size === 20 || !(st.size >= 0)) st.size = 30; return st; })(Object.assign(f.settings, s.settings || {}))
+    settings: (st => { if (st.size === 10 || st.size === 20 || !(st.size >= 0)) st.size = 30; if (st.deck !== 'verb') st.deck = 'word'; return st; })(Object.assign(f.settings, s.settings || {})),
+    stats: normStats(s.stats)
   };
 }
 function loadLocal(){
@@ -318,7 +360,7 @@ async function flush(){
   let retry = false;
   try {
     for (const b of buckets) await bucketsCol().doc('b' + b).set({ cards: cardsInBucket(b) });
-    if (doMeta) await metaRef().set({ meta: state.meta, settings: state.settings });
+    if (doMeta) await metaRef().set({ meta: state.meta, settings: state.settings, stats: state.stats });
     setSync('synced');
   } catch(e){
     buckets.forEach(b => sync.dirty.add(b)); if (doMeta) sync.metaDirty = true;
@@ -351,7 +393,7 @@ async function connectDb(){
     if (rm) hasRemote = true;
     const remoteUpdated = (rm && rm.meta && rm.meta.updatedAt) || 0;
     if (hasRemote && !session && remoteUpdated >= (state.meta.updatedAt || 0)){
-      state = normalizeState({ cards: remoteCards, meta: rm ? rm.meta : {}, settings: rm ? rm.settings : {} });
+      state = normalizeState({ cards: remoteCards, meta: rm ? rm.meta : {}, settings: rm ? rm.settings : {}, stats: rm ? rm.stats : null });
       ensureVerbs(); saveLocal(); setSync('synced'); render();
     } else if (Object.keys(state.cards).length || state.meta.updatedAt){
       touch('all');
@@ -379,8 +421,46 @@ function markPractised(){
   if (m.lastDay === t) return;
   m.streak = m.lastDay === yesterdayKey() ? (m.streak || 0) + 1 : 1;
   m.lastDay = t;
+  m.best = Math.max(m.best || 0, m.streak);
 }
 function streakNow(){ const m = state.meta; return (m.lastDay === todayKey() || m.lastDay === yesterdayKey()) ? (m.streak || 0) : 0; }
+
+/* ---------- progress tracking ---------- */
+const RIDX = { easy:0, medium:1, hard:2, wrong:3 };
+const IDLE_CAP = 45000;   // the most one tap can add to your time, so a forgotten open card doesn't inflate it
+function p2(n){ return n < 10 ? '0' + n : '' + n; }
+function statKey(d){ return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
+function dayStat(k){
+  const D = state.stats.days;
+  return D[k] || (D[k] = { ms:0, n:0, r:[0,0,0,0], sess:0, nv:0, tp:[0,0,0,0,0,0,0,0] });
+}
+function periodOf(h){ return h >= 5 && h < 12 ? 0 : h >= 12 && h < 17 ? 1 : h >= 17 && h < 22 ? 2 : 3; }
+function recordRating(c, r){
+  const now = new Date(), k = statKey(now), d = dayStat(k), i = RIDX[r], pr = periodOf(now.getHours());
+  d.r[i]++; d.n++; d.tp[pr * 2]++; if (i < 2) d.tp[pr * 2 + 1]++; if (c.type === 'verb') d.nv++;
+  state.stats.total.n++;
+  c.stat = c.stat || [0,0,0,0]; c.stat[i]++;
+  return { k, i, pr, verb:c.type === 'verb' };
+}
+function unrecordRating(rec){
+  const d = state.stats.days[rec.k]; if (!d) return;
+  const dec = (a, i) => { a[i] = Math.max(0, (a[i] || 0) - 1); };
+  dec(d.r, rec.i); dec(d.tp, rec.pr * 2); if (rec.i < 2) dec(d.tp, rec.pr * 2 + 1);
+  d.n = Math.max(0, d.n - 1); if (rec.verb) d.nv = Math.max(0, (d.nv || 0) - 1);
+  state.stats.total.n = Math.max(0, state.stats.total.n - 1);
+}
+let tickAt = 0;
+function tick(){
+  if (!tickAt) return;
+  const now = Date.now(), live = view === 'review';
+  const dt = live ? Math.min(now - tickAt, IDLE_CAP) : 0;
+  tickAt = live ? now : 0;
+  if (dt > 0){ dayStat(statKey(new Date())).ms += dt; state.stats.total.ms += dt; }
+}
+function pruneStats(){
+  const cut = statKey(new Date(Date.now() - 400 * 864e5));
+  for (const k in state.stats.days) if (k < cut) delete state.stats.days[k];
+}
 
 function makeCard(en, es, note, created, studied){
   return { id:newId(), en, es, note: note || '', created, status: studied ? 'seen' : 'new',
@@ -453,10 +533,10 @@ let imp = null;
 function render(){
   document.body.classList.toggle('focus', view === 'review');
   document.querySelectorAll('[data-nav]').forEach(b => {
-    const on = b.dataset.nav === view || (b.dataset.nav === 'words' && view === 'import') || (view === 'summary' && b.dataset.nav === (session && session.deck === 'verb' ? 'verbs' : 'home'));
+    const on = b.dataset.nav === view || (b.dataset.nav === 'words' && view === 'import') || (view === 'summary' && b.dataset.nav === ((session && session.back) || 'home'));
     if (on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
   });
-  ({ home:renderHome, review:renderReview, summary:renderSummary, words:renderWords, verbs:renderVerbs, import:renderImport, settings:renderSettings })[view]();
+  ({ home:renderHome, review:renderReview, summary:renderSummary, words:renderWords, verbs:renderVerbs, progress:renderProgress, import:renderImport, settings:renderSettings })[view]();
 }
 
 /* ---------- verbs ---------- */
@@ -520,9 +600,33 @@ const EN_PRON = ['I','you','he / she','we','they'];
 const PILL = ['yo','tú','él / ella / usted','nosotros','ellos / ellas / ustedes'];
 const ES_PRON = ['yo','tú','él / ella / usted','nosotros','ellos / ustedes'];
 const ENDINGS = { ar:['o','as','a','amos','an'], er:['o','es','e','emos','en'], ir:['o','es','e','imos','en'] };
+const BE = ['am','are','is','are','are'];
+function customVerbs(){ return state.meta.customVerbs || {}; }
+function getVerb(inf){ return VERB_MAP[inf] || customVerbs()[inf] || null; }
+function verbList(){ return VERBS.concat(Object.values(customVerbs())); }
 function enPrompt(v, p){
-  if (!v.b) return EN_PRON[p] + ' ' + ['am','are','is','are','are'][p];
-  return EN_PRON[p] + ' ' + (p === 2 ? v.s3 : v.b);
+  const pro = EN_PRON[p];
+  if (!v.b) return pro + ' ' + BE[p];
+  if (p === 2) return pro + ' ' + v.s3;
+  return pro + ' ' + v.b.split(' / ').map(x => /^be(\s|$)/.test(x) ? BE[p] + x.slice(2) : x).join(' / ');
+}
+function enThird(w){
+  if (w === 'have') return 'has';
+  if (w === 'be') return 'is';
+  if (/(s|x|z|ch|sh|o)$/.test(w)) return w + 'es';
+  if (/[^aeiou]y$/.test(w)) return w.slice(0, -1) + 'ies';
+  return w + 's';
+}
+// Turns "to receive" into the two English forms the cards need: "receive" and "receives".
+function enForms(m){
+  const parts = String(m).split(/\s*\/\s*/).map(x => x.trim().replace(/^to\s+/i, '').replace(/\s+/g, ' ')).filter(Boolean);
+  const s3 = parts.map(x => { const [w, ...rest] = x.split(' '); return [enThird(w.toLowerCase()), ...rest].join(' '); });
+  return { b:parts.join(' / '), s3:s3.join(' / ') };
+}
+// Regular -ar / -er / -ir pattern. Returns null for anything else, so those need typed forms.
+function regularForms(inf){
+  const m = /^([a-záéíóúüñ]+?)(ar|er|ir)$/.exec(inf);
+  return m ? ENDINGS[m[2]].map(e => m[1] + e) : null;
 }
 function persons(){ const p = state.settings.persons; return Array.isArray(p) && p.length ? p : [0,1,2]; }
 function verbsOn(){ return state.meta.verbsOn || {}; }
@@ -536,16 +640,26 @@ function ensureVerbs(){
   if (m.vsession == null) m.vsession = 0;
   const added = [];
   for (const inf in m.verbsOn){
-    const v = VERB_MAP[inf]; if (!v || !m.verbsOn[inf]) continue;
+    const v = getVerb(inf); if (!v || !m.verbsOn[inf]) continue;
+    const rank = v.rank != null ? v.rank : 1000;
     for (let p = 0; p < 5; p++){
       const id = 'v_' + inf + '_' + p;
       if (state.cards[id]) continue;
-      state.cards[id] = { id, type:'verb', inf, p, en:enPrompt(v, p), es:v.f[p], note:v.h, pill:PILL[p],
-                          created:Date.now() + v.rank * 10 + p, status:'new', gap:0, due:0, lapses:0, reviews:0 };
+      state.cards[id] = { id, type:'verb', inf, p, en:enPrompt(v, p), es:v.f[p], note:v.h || '', pill:PILL[p],
+                          created:Date.now() + rank * 10 + p, status:'new', gap:0, due:0, lapses:0, reviews:0 };
       added.push(id);
     }
   }
   if (added.length) touch(added);
+}
+function syncVerbCards(inf){
+  const v = getVerb(inf); if (!v) return;
+  const ids = [];
+  for (let p = 0; p < 5; p++){
+    const c = state.cards['v_' + inf + '_' + p]; if (!c) continue;
+    c.en = enPrompt(v, p); c.es = v.f[p]; c.note = v.h || ''; ids.push(c.id);
+  }
+  if (ids.length) touch(ids);
 }
 function formHtml(inf, p, form){
   const end = (ENDINGS[inf.slice(-2)] || [])[p];
@@ -553,61 +667,42 @@ function formHtml(inf, p, form){
   return esc(form);
 }
 function verbTable(inf, hp, dim){
-  const v = VERB_MAP[inf]; if (!v) return '';
+  const v = getVerb(inf); if (!v) return '';
   const ps = persons();
   return `<table class="vtable">${v.f.map((f, p) => `<tr class="${p === hp ? 'hl' : ''}${!dim || ps.includes(p) ? '' : ' off'}"><td class="vp">${ES_PRON[p]}</td><td class="vf">${formHtml(inf, p, f)}</td>${'speechSynthesis' in window ? `<td class="vs"><button class="speak sm" data-act="say" data-t="${esc(f)}" aria-label="Hear ${esc(f)}">${SPEAK_SVG}</button></td>` : ''}</tr>`).join('')}</table>`;
 }
+
+/* ---------- verbs tab (reference) ---------- */
 let verbQuery = '';
 function renderVerbs(){
-  const S = nextS('verb'), p = pools(S, 'verb'), s = state.settings;
-  const avail = p.fresh.length + p.weak.length + p.easyDue.length;
-  const nOn = VERBS.filter(v => verbsOn()[v.inf]).length;
-  const count = avail ? plan('normal', S, 'verb').length : 0;
-  const sizes = [[30,'30'],[50,'50'],[0,'All']];
-  const vs = s.vsize == null ? 30 : s.vsize;
-  const isCustom = showVCustom || !sizes.some(([n]) => n === vs);
+  const list = verbList(), on = verbsOn(), nOn = list.filter(v => on[v.inf]).length;
   app.innerHTML = `
     <h1 class="title">Verbs</h1>
-    <div class="panel">
-      <p class="vline">${avail ? `<b>${plural(count,'verb form')}</b> ready, from ${plural(nOn,'verb')} you’re practising.` : nOn ? 'All your verb forms are on an Easy break.' : 'Pick a verb below and tap Practise this verb.'}</p>
-      ${avail ? `
-        <div class="opt-label">Cards</div>
-        <div class="seg" role="group" aria-label="Cards">
-          ${sizes.map(([n,l]) => `<button data-act="vsize" data-n="${n}" aria-pressed="${!isCustom && vs === n}">${l}</button>`).join('')}
-          <button data-act="vsize-custom" aria-pressed="${isCustom}">Other</button>
-        </div>
-        ${isCustom ? `<div class="custom-size"><input id="vcustom-n" type="number" inputmode="numeric" min="1" max="999" value="${vs > 0 && !sizes.some(([n]) => n === vs) ? vs : ''}" aria-label="Number of cards" placeholder="40"><span>cards</span></div>` : ''}
-        <div class="opt-label">Answer</div>
-        <div class="seg" role="group" aria-label="Answer">
-          <button data-act="mode" data-m="recall" aria-pressed="${s.mode === 'recall'}">In my head</button>
-          <button data-act="mode" data-m="type" aria-pressed="${s.mode === 'type'}">Type it</button>
-        </div>
-        <button class="btn-primary" data-act="v-start">Start verb session</button>`
-      : (p.later.length ? '<button class="btn-primary" data-act="v-start-ahead">Review early</button>' : '')}
-    </div>
-    <h3>Top 50 verbs</h3>
-    <input class="search" id="vq" type="search" placeholder="Search verbs in English or Spanish" value="${esc(verbQuery)}" aria-label="Search verbs" style="margin-top:0">
+    <p class="sub">${plural(list.length,'verb')} · ${nOn} in your practice</p>
+    <div class="btn-row" style="margin-top:0"><button class="btn" data-act="verb-add">Add a verb</button><button class="btn" data-act="verb-paste">Paste a list</button></div>
+    <input class="search" id="vq" type="search" placeholder="Search verbs in English or Spanish" value="${esc(verbQuery)}" aria-label="Search verbs">
     <div class="list" id="verblist"></div>`;
   renderVerbList();
 }
 function renderVerbList(){
   const el = document.getElementById('verblist'); if (!el) return;
   const q = fold(norm(verbQuery)), on = verbsOn();
-  let list = VERBS;
+  let list = verbList();
   if (q) list = list.filter(v => fold(v.inf).includes(q) || fold(norm(v.m)).includes(q) || v.f.some(f => fold(f).includes(q)));
-  el.innerHTML = list.length ? list.map(v => `<button class="row" data-act="verb" data-inf="${v.inf}"><span class="en">${v.inf}</span><span class="vm">${esc(v.m)}${v.irr ? ' <span class="irr">irregular</span>' : ''}</span><span class="st${on[v.inf] ? ' practising' : ''}">${on[v.inf] ? 'Practising' : ''}</span></button>`).join('')
+  el.innerHTML = list.length ? list.map(v => `<button class="row" data-act="verb" data-inf="${esc(v.inf)}"><span class="en">${esc(v.inf)}</span><span class="vm">${esc(v.m)}${v.irr ? ' <span class="irr">irregular</span>' : ''}${v.custom ? ' <span class="mine">yours</span>' : ''}</span><span class="st${on[v.inf] ? ' practising' : ''}">${on[v.inf] ? 'Practising' : ''}</span></button>`).join('')
     : '<p class="empty">No verbs match that search.</p>';
 }
 function openVerb(inf){
-  const v = VERB_MAP[inf]; if (!v) return;
+  const v = getVerb(inf); if (!v) return;
   const on = !!verbsOn()[inf];
   openSheet(`
-    <h2>${v.inf}</h2>
+    <h2>${esc(v.inf)}</h2>
     <p class="help">${esc(v.m)}${v.irr ? ' · <span class="irr">irregular</span>' : ` · regular -${v.inf.slice(-2)} verb`}</p>
     ${v.h ? `<p class="help">${esc(v.h)}</p>` : ''}
     <div class="panel" style="margin-top:14px">${verbTable(inf, -1)}</div>
     <p class="help">${v.irr ? 'Coloured letters follow the regular pattern. The rest is irregular, so learn it as it is.' : 'The coloured letters are the endings. Other regular -' + v.inf.slice(-2) + ' verbs use the same ones.'}</p>
-    <div class="btn-row">${on ? `<button class="btn" data-act="verb-toggle" data-inf="${inf}">Stop practising this verb</button>` : `<button class="btn-primary" style="margin:0" data-act="verb-toggle" data-inf="${inf}">Practise this verb</button>`}</div>
+    <div class="btn-row">${on ? `<button class="btn" data-act="verb-toggle" data-inf="${esc(inf)}">Stop practising this verb</button>` : `<button class="btn-primary" style="margin:0" data-act="verb-toggle" data-inf="${esc(inf)}">Practise this verb</button>`}</div>
+    ${v.custom ? `<div class="btn-row"><button class="btn" data-act="verb-edit" data-inf="${esc(inf)}">Edit this verb</button></div>` : ''}
     <div class="btn-row"><button class="btn" data-act="close-sheet">Close</button></div>`);
 }
 function toggleVerb(inf){
@@ -616,7 +711,126 @@ function toggleVerb(inf){
   else { m.verbsOn[inf] = true; ensureVerbs(); touch([]); toast(inf + ' added to your verb sessions'); }
   closeSheet(); render();
 }
-let showVCustom = false;
+
+/* ---------- your own verbs ---------- */
+let vedit = { orig:null, auto:true };
+function openVerbEditor(inf){
+  const v = inf ? getVerb(inf) : null;
+  vedit = { orig: v ? v.inf : null, auto: !v };
+  const f = v ? v.f : ['','','','',''];
+  openSheet(`
+    <h2>${v ? 'Edit verb' : 'Add a verb'}</h2>
+    <label class="f" for="v-inf">Spanish verb</label>
+    <input class="field" id="v-inf" lang="es" value="${v ? esc(v.inf) : ''}" ${v ? 'readonly' : ''} placeholder="recibir" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <label class="f" for="v-m">English meaning</label>
+    <input class="field" id="v-m" value="${v ? esc(v.m) : ''}" placeholder="to receive" autocomplete="off" autocapitalize="off">
+    <p class="help" id="v-ask"></p>
+    <label class="f">Forms</label>
+    ${PILL.map((l, i) => `<div class="vrow"><label for="v-f${i}">${l}</label><input class="field" id="v-f${i}" lang="es" value="${esc(f[i])}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>`).join('')}
+    <p class="help" id="v-hint"></p>
+    <label class="f" for="v-note">Note (optional)</label>
+    <input class="field" id="v-note" value="${v ? esc(v.h || '') : ''}" placeholder="for example: people and places" autocomplete="off">
+    <label class="check"><input type="checkbox" id="v-on" ${!v || verbsOn()[v.inf] ? 'checked' : ''}><span>Practise this verb</span></label>
+    <div class="btn-row"><button class="btn-primary" style="margin:0" data-act="verb-save">${v ? 'Save changes' : 'Add verb'}</button></div>
+    ${v ? `<div class="btn-row"><button class="btn btn-danger" data-act="verb-delete" data-inf="${esc(v.inf)}">Delete this verb</button></div>` : ''}
+    <div class="btn-row"><button class="btn" data-act="close-sheet">Cancel</button></div>`);
+  refreshVerbEditor(false);
+}
+function refreshVerbEditor(fill){
+  const g = id => document.getElementById(id); if (!g('v-inf')) return;
+  const inf = g('v-inf').value.trim().toLowerCase(), m = g('v-m').value.trim();
+  const reg = regularForms(inf);
+  if (fill && vedit.auto){ for (let i = 0; i < 5; i++) g('v-f' + i).value = reg ? reg[i] : ''; }
+  const e = m ? enForms(m) : { b:'' };
+  let ask = e.b ? 'Cards will ask: “' + enPrompt(e, 1) + '”.' : '';
+  const twin = e.b ? verbList().find(x => x.inf !== inf && x.b && x.b === e.b) : null;
+  if (twin) ask += ' ' + twin.inf + ' has the same meaning, so add a note to tell them apart.';
+  g('v-ask').textContent = ask;
+  g('v-hint').textContent = !inf ? '' : !reg ? 'Type all five forms.' : vedit.auto ? 'Filled in with the regular pattern. If this verb is irregular, correct the forms.' : '';
+}
+// Data only: stores the verb. Callers run ensureVerbs() and touch() afterwards.
+function setCustomVerb(v, practise){
+  const reg = regularForms(v.inf), e = enForms(v.m);
+  const irr = !reg || reg.some((x, i) => x !== v.f[i]);
+  const m = state.meta; m.customVerbs = m.customVerbs || {}; m.verbsOn = m.verbsOn || {};
+  m.customVerbs[v.inf] = { inf:v.inf, m:v.m, b:e.b, s3:e.s3, f:v.f.slice(), irr, h:v.h || '', custom:true };
+  if (practise) m.verbsOn[v.inf] = true; else delete m.verbsOn[v.inf];
+}
+function saveVerbEditor(){
+  const g = id => document.getElementById(id);
+  const inf = g('v-inf').value.trim().toLowerCase(), m = g('v-m').value.trim();
+  const f = [0,1,2,3,4].map(i => g('v-f' + i).value.trim().toLowerCase());
+  const note = g('v-note').value.trim(), on = g('v-on').checked;
+  if (!/^[a-záéíóúüñ]{2,}$/.test(inf)){ toast('Type the verb in Spanish, like recibir.'); return; }
+  if (!enForms(m).b){ toast('Add the English meaning, like to receive.'); return; }
+  if (f.some(x => !x)){ toast('Fill in all five forms.'); return; }
+  if (!vedit.orig && getVerb(inf)){ toast('That verb is already in your list.'); return; }
+  setCustomVerb({ inf, m, f, h:note }, on);
+  ensureVerbs(); syncVerbCards(inf); touch([]);
+  const editing = !!vedit.orig;
+  closeSheet(); toast(editing ? 'Changes saved' : inf + ' added'); render();
+}
+function deleteCustomVerb(inf){
+  const m = state.meta, ids = [];
+  if (m.customVerbs) delete m.customVerbs[inf];
+  if (m.verbsOn) delete m.verbsOn[inf];
+  for (let p = 0; p < 5; p++){ const id = 'v_' + inf + '_' + p; if (state.cards[id]){ delete state.cards[id]; ids.push(id); } }
+  touch(ids);
+}
+
+/* ---------- paste a list of verbs ---------- */
+let vimp = { text:'', on:true };
+function parseVerbList(text){
+  const rows = [], bad = [], seen = new Set(); let dupes = 0;
+  for (const raw of String(text).replace(/\r/g, '').split('\n')){
+    const line = raw.trim(); if (!line || line.startsWith('#')) continue;
+    const parts = line.split(/\s*=\s*|\t+/).map(x => x.trim());
+    const inf = (parts[0] || '').toLowerCase(), m = parts[1] || '';
+    if (!/^[a-záéíóúüñ]{2,}$/.test(inf) || !enForms(m).b){ bad.push(line); continue; }
+    let f = null, h = '';
+    for (const x of parts.slice(2).filter(Boolean)){
+      const fs = x.split(/\s*,\s*/).map(y => y.trim().toLowerCase()).filter(Boolean);
+      if (!f && fs.length === 5) f = fs; else if (!h) h = x;
+    }
+    let auto = false;
+    if (!f){ f = regularForms(inf); auto = !!f; }
+    if (!f){ bad.push(line); continue; }
+    if (getVerb(inf) || seen.has(inf)){ dupes++; continue; }
+    seen.add(inf); rows.push({ inf, m, f, h, auto });
+  }
+  return { rows, bad, dupes };
+}
+function openVerbPaste(){
+  vimp = { text:'', on:true };
+  openSheet(`
+    <h2>Paste a list of verbs</h2>
+    <p class="help">One verb per line: <i>verb = meaning = five forms</i>. Regular verbs can leave out the forms. Ask Claude for a list in this format.</p>
+    <textarea class="field" id="vp-text" spellcheck="false" placeholder="recibir = to receive&#10;oír = to hear = oigo, oyes, oye, oímos, oyen"></textarea>
+    <div id="vp-preview"></div>
+    <div class="btn-row"><button class="btn" data-act="close-sheet">Cancel</button></div>`);
+}
+function updateVerbPaste(){
+  const el = document.getElementById('vp-preview'); if (!el) return;
+  if (!vimp.text.trim()){ el.innerHTML = ''; return; }
+  const r = parseVerbList(vimp.text), notes = [];
+  const autos = r.rows.filter(x => x.auto);
+  if (autos.length) notes.push('Filled in with the regular pattern: <b>' + autos.slice(0, 6).map(x => esc(x.inf)).join(', ') + (autos.length > 6 ? ', …' : '') + '</b>. Check these really are regular, and add the five forms for any that aren’t.');
+  if (r.dupes) notes.push(plural(r.dupes, 'verb') + ' already in your list, skipped.');
+  if (r.bad.length) notes.push(plural(r.bad.length, 'line') + ' skipped. Each needs a verb and a meaning, and irregular verbs need all five forms. First one: “' + esc(r.bad[0]) + '”');
+  el.innerHTML = (r.rows.length ? `
+      <h3 style="margin-top:14px">${plural(r.rows.length, 'verb')} ready</h3>
+      <div class="scroll-x"><table class="preview"><thead><tr><th>Verb</th><th>Forms</th></tr></thead><tbody>${r.rows.slice(0, 6).map(x => `<tr><td>${esc(x.inf)}<br><span class="vm">${esc(x.m)}</span></td><td>${esc(x.f.join(', '))}</td></tr>`).join('')}</tbody></table></div>
+      ${r.rows.length > 6 ? `<p class="help">and ${r.rows.length - 6} more</p>` : ''}
+      <label class="check"><input type="checkbox" id="vp-on" ${vimp.on ? 'checked' : ''}><span>Practise these now</span></label>
+      <button class="btn-primary" data-act="vp-go">Add ${plural(r.rows.length, 'verb')}</button>` : '')
+    + notes.map(t => `<p class="help">${t}</p>`).join('');
+}
+function runVerbPaste(){
+  const r = parseVerbList(vimp.text); if (!r.rows.length) return;
+  r.rows.forEach(x => setCustomVerb(x, vimp.on));
+  ensureVerbs(); touch([]);
+  closeSheet(); toast(plural(r.rows.length, 'verb') + ' added'); render();
+}
 
 const nextS = (deck) => (deck === 'verb' ? (state.meta.vsession || 0) : state.meta.session) + 1;
 // Weak = your last answer was Medium, Hard or Wrong (or a studied word you haven't rated yet).
@@ -640,74 +854,93 @@ function pools(S, deck){
 // Picks new words first, then weak words (Wrong, then Hard, then Medium), then Easy words
 // whose break is over, then shuffles the picked cards so the order is random.
 function plan(kind, S, deck){
-  const sz = deck === 'verb' ? (state.settings.vsize == null ? 30 : state.settings.vsize) : state.settings.size;
-  const size = sz || Infinity;
+  const size = sizeOf(deck) || Infinity;
   const p = pools(S, deck);
   if (kind === 'ahead') return shuffle(p.later.slice(0, Math.min(size, 20)).map(c => c.id));
-  const order = [...p.fresh, ...p.weak, ...p.easyDue, ...(includeAhead && deck !== 'verb' ? p.later : [])];
+  const order = [...p.fresh, ...p.weak, ...p.easyDue, ...(includeAhead ? p.later : [])];
   return shuffle(order.slice(0, size).map(c => c.id));
 }
 
 const PARROT = '<svg class="parrot" viewBox="0 0 120 132" aria-hidden="true"><path d="M50 100 L40 128 L56 119 L61 130 L70 101 Z" fill="#178A51"/><ellipse cx="58" cy="80" rx="31" ry="34" fill="#2DB86E"/><path d="M30 68 Q24 100 50 108 Q42 88 46 66 Z" fill="#178A51"/><ellipse cx="64" cy="88" rx="17" ry="21" fill="#9BE6B4"/><path d="M46 22 Q46 4 58 12 Q62 0 72 10 Q80 4 80 18 Z" fill="#2DB86E"/><circle cx="60" cy="42" r="28" fill="#2DB86E"/><ellipse cx="71" cy="43" rx="15" ry="14" fill="#EAFBF0"/><circle cx="71" cy="40" r="6.5" fill="#18232D"/><circle cx="73.5" cy="37.5" r="2.3" fill="#fff"/><circle cx="64" cy="53" r="3.6" fill="#FF8FA3" opacity=".65"/><path d="M78 44 Q97 41 95 61 Q89 54 79 56 Z" fill="#FFB020"/><path d="M79 56 Q87 56 89 60 Q84 65 78 60 Z" fill="#DE8700"/><path d="M50 112 v8 M58 112 v8 M66 112 v8" stroke="#FFB020" stroke-width="4.5" stroke-linecap="round"/><path d="M38 121 H82" stroke="#8B5A2B" stroke-width="5" stroke-linecap="round"/></svg>';
 const FLAME = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c.5 3.2-1.2 5-2.6 6.6C8 10.2 7 11.7 7 14a5 5 0 0 0 10 0c0-1.6-.6-3-1.5-4.1.1 1.5-.5 2.6-1.5 3 .4-2.9-.6-6.6-2-10.9z"/></svg>';
 
+function homeDeck(){ return state.settings.deck === 'verb' ? 'verb' : 'word'; }
+function sizeKey(deck){ return deck === 'verb' ? 'vsize' : 'size'; }
+function sizeOf(deck){ const v = state.settings[sizeKey(deck)]; return v == null ? 30 : v; }
+function unitOf(deck, n){ return deck === 'verb' ? plural(n, 'verb form') : plural(n, 'card'); }
+
 function renderHome(){
   const st = streakNow(), on = state.meta.lastDay === todayKey();
+  const deck = homeDeck(), isV = deck === 'verb';
   const top = `<header class="top">
       <div class="brand"><h1>Loro</h1><p>Master Spanish, one word at a time</p></div>
       <div class="streak${on ? ' on' : ''}" aria-label="${plural(st,'day')} in a row">${FLAME}${st}</div>
     </header>`;
-  const total = deckCards().length;
-  if (!total){
-    app.innerHTML = `${top}
-      <section class="hero"><div class="bubble">¡Hola! Let’s add your first words.</div>${PARROT}</section>
-      <div class="btn-row"><button class="btn" data-act="add">Add a word</button><button class="btn" data-act="go-import">Import words</button></div>
-      <p class="ver">Version ${APP_VERSION}</p>`;
+  const sw = `<div class="seg deck-seg" role="group" aria-label="What to practise">
+      <button data-act="deck" data-d="word" aria-pressed="${!isV}">Words</button>
+      <button data-act="deck" data-d="verb" aria-pressed="${isV}">Verbs</button>
+    </div>`;
+  const hero = msg => `<section class="hero"><div class="bubble">${msg}</div>${PARROT}</section>${sw}`;
+  const ver = `<p class="ver">Version ${APP_VERSION}</p>`;
+  if (!isV && !deckCards('word').length){
+    app.innerHTML = top + hero('¡Hola! Let’s add your first words.')
+      + `<div class="btn-row"><button class="btn" data-act="add">Add a word</button><button class="btn" data-act="go-import">Import words</button></div>` + ver;
     return;
   }
-  const s = state.settings, S = nextS(), p = pools(S);
+  if (isV && !deckCards('verb').length){
+    app.innerHTML = top + hero('Pick a verb to practise.')
+      + `<div class="btn-row"><button class="btn" data-act="go-verbs">Choose verbs</button></div>` + ver;
+    return;
+  }
+  const s = state.settings, S = nextS(deck), p = pools(S, deck);
   if (!p.later.length) includeAhead = false;
   const ready = p.fresh.length + p.weak.length + p.easyDue.length > 0 || includeAhead;
   if (!ready){
-    app.innerHTML = `${top}
-      <section class="hero"><div class="bubble">¡Muy bien! Every word is on an Easy break.</div>${PARROT}</section>
-      <button class="btn-primary" data-act="start-ahead">Review early</button>
-      <p class="ver">Version ${APP_VERSION}</p>`;
+    app.innerHTML = top + hero(`¡Muy bien! Every ${isV ? 'verb form' : 'word'} is on an Easy break.`)
+      + `<button class="btn-primary" data-act="start-ahead">Review early</button>` + ver;
     return;
   }
-  const count = plan('normal', S).length, nNew = Math.min(p.fresh.length, count);
-  const sizes = [[30,'30'],[50,'50'],[0,'All']];
-  const isCustom = showCustom || !sizes.some(([n]) => n === s.size);
+  const count = plan('normal', S, deck).length, nNew = Math.min(p.fresh.length, count);
+  const sizes = [[30,'30'],[50,'50'],[0,'All']], size = sizeOf(deck);
+  const isCustom = showCustom || !sizes.some(([n]) => n === size);
   app.innerHTML = `${top}
     <section class="hero">
-      <div class="bubble">¡Vamos! <b>${plural(count,'card')}</b>${nNew ? `, ${nNew} new` : ''}.</div>
+      <div class="bubble"><span class="b1">¡Vamos!</span><span class="b2"><b>${unitOf(deck, count)}</b>${nNew ? ` · ${nNew} new` : ''}</span></div>
       ${PARROT}
     </section>
+    ${sw}
     <div class="opt-label">Cards</div>
     <div class="seg" role="group" aria-label="Cards">
-      ${sizes.map(([n,l]) => `<button data-act="size" data-n="${n}" aria-pressed="${!isCustom && s.size === n}">${l}</button>`).join('')}
+      ${sizes.map(([n,l]) => `<button data-act="size" data-n="${n}" aria-pressed="${!isCustom && size === n}">${l}</button>`).join('')}
       <button data-act="size-custom" aria-pressed="${isCustom}">Other</button>
     </div>
-    ${isCustom ? `<div class="custom-size"><input id="custom-n" type="number" inputmode="numeric" min="1" max="999" value="${s.size > 0 && !sizes.some(([n]) => n === s.size) ? s.size : ''}" aria-label="Number of cards" placeholder="40"><span>cards</span></div>` : ''}
-    ${p.later.length ? `<label class="toggle"><input type="checkbox" id="inc-ahead" ${includeAhead ? 'checked' : ''}>Add words on an Easy break (${p.later.length})</label>` : ''}
+    ${isCustom ? `<div class="custom-size"><input id="custom-n" type="number" inputmode="numeric" min="1" max="999" value="${size > 0 && !sizes.some(([n]) => n === size) ? size : ''}" aria-label="Number of cards" placeholder="40"><span>cards</span></div>` : ''}
+    ${p.later.length ? `<label class="toggle"><input type="checkbox" id="inc-ahead" ${includeAhead ? 'checked' : ''}>Add ${isV ? 'verb forms' : 'words'} on an Easy break (${p.later.length})</label>` : ''}
     <div class="opt-label">Answer</div>
     <div class="seg" role="group" aria-label="Answer">
       <button data-act="mode" data-m="recall" aria-pressed="${s.mode === 'recall'}">In my head</button>
       <button data-act="mode" data-m="type" aria-pressed="${s.mode === 'type'}">Type it</button>
     </div>
     <button class="btn-primary" data-act="start">Start new session</button>
-    <p class="ver">Version ${APP_VERSION}</p>`;
+    ${ver}`;
 }
 
 function startSession(kind, deck){
-  const S = nextS(deck);
-  const q = plan(kind, S, deck);
-  if (!q.length){ toast('Nothing to review right now.'); render(); return; }
-  if (deck === 'verb') state.meta.vsession = S; else state.meta.session = S;
-  state.meta.sessionReviews = 0; touch([]);
+  deck = deck || 'word';
+  let q, S = 0;
+  if (kind === 'struggle'){ q = shuffle(struggleList().slice(0, 20).map(c => c.id)); }
+  else { S = nextS(deck); q = plan(kind, S, deck); }
+  if (!q.length){ toast(kind === 'struggle' ? 'No tricky cards yet.' : 'Nothing to review right now.'); render(); return; }
+  if (kind !== 'struggle'){ if (deck === 'verb') state.meta.vsession = S; else state.meta.session = S; }
+  state.meta.sessionReviews = 0;
+  pruneStats();
+  dayStat(statKey(new Date())).sess++; state.stats.total.sess++;
+  touch([]);
   includeAhead = false;
   session = { queue:q, idx:0, appear:{}, missed:new Set(), stats:{easy:0,medium:0,hard:0,wrong:0},
-              started:Date.now(), mode:state.settings.mode, revealed:false, result:null, typed:'', deck:deck || 'word' };
+              started:Date.now(), mode:state.settings.mode, revealed:false, result:null, typed:'', deck,
+              back: kind === 'struggle' ? 'progress' : 'home' };
+  tickAt = Date.now();
   undoSnap = null; view = 'review'; render();
 }
 
@@ -763,11 +996,12 @@ function renderReview(){
   if (typing && !s.revealed){ const inp = document.getElementById('answer'); if (inp) inp.focus(); }
 }
 
-function reveal(){ session.revealed = true; render(); }
+function reveal(){ tick(); session.revealed = true; render(); }
 function doCheck(dunno){
   const inp = document.getElementById('answer');
   const typed = dunno ? '' : (inp ? inp.value : '');
   const c = state.cards[session.queue[session.idx]];
+  tick();
   session.typed = typed;
   session.result = dunno ? { kind:'blank' } : checkAnswer(typed, c.es, c.type === 'verb');
   session.revealed = true; render();
@@ -776,9 +1010,10 @@ function doCheck(dunno){
 function rate(r){
   const s = session, id = s.queue[s.idx], c = state.cards[id];
   if (!c) return;
+  tick();
   undoSnap = { queue:s.queue.slice(), idx:s.idx, appear:Object.assign({}, s.appear), missed:new Set(s.missed),
                stats:Object.assign({}, s.stats), card:JSON.parse(JSON.stringify(c)), meta:Object.assign({}, state.meta) };
-  const S = s.deck === 'verb' ? state.meta.vsession : state.meta.session;
+  const S = c.type === 'verb' ? state.meta.vsession : state.meta.session;
   s.appear[id] = (s.appear[id] || 0) + 1;
   if (c.status === 'new') c.status = 'seen';
   c.reviews = (c.reviews || 0) + 1;
@@ -804,6 +1039,7 @@ function rate(r){
   }
   c.lastRating = (s.missed.has(id) && r === 'easy') ? 'medium' : r;
   markPractised();
+  undoSnap.rec = recordRating(c, r);
   c.last = Date.now();
   state.meta.sessionReviews++; state.meta.lastActive = Date.now();
   touch([id]);
@@ -815,10 +1051,12 @@ function undo(){
   const u = undoSnap, id = u.queue[u.idx];
   Object.assign(session, { queue:u.queue, idx:u.idx, appear:u.appear, missed:u.missed, stats:u.stats, revealed:true, result:null, typed:'' });
   state.cards[id] = u.card; state.meta = u.meta;
+  if (u.rec) unrecordRating(u.rec);
   undoSnap = null; touch([id]); render();
 }
 function endSession(){
-  if (session && session.idx > 0) view = 'summary'; else { session = null; view = 'home'; }
+  tick(); tickAt = 0; touch([]);
+  if (session && session.idx > 0) view = 'summary'; else { const b = session && session.back; session = null; view = b || 'home'; }
   render();
 }
 
@@ -843,7 +1081,7 @@ function renderSummary(){
           <div class="missed">${missed.map(c => `<span>${esc(c.en)}</span><span class="es">${esc(c.es)}</span>`).join('')}</div>` : ''}
       </div>
     </article>
-    <button class="btn-primary" data-act="done">Back to Study</button>`;
+    <button class="btn-primary" data-act="done">${s.back === 'progress' ? 'Back to Progress' : 'Back to Study'}</button>`;
 }
 
 function statusOf(c){
@@ -1033,6 +1271,118 @@ function runImport(){
   imp = null; view = 'words'; render();
 }
 
+/* ---------- progress page ---------- */
+let calOffset = 0;
+function missCount(c){ return (c.stat ? c.stat[2] + c.stat[3] : 0); }
+function seenCount(c){ return c.stat ? c.stat[0] + c.stat[1] + c.stat[2] + c.stat[3] : 0; }
+// Cards you've marked Hard or Wrong, most-missed first.
+function struggleList(){
+  const on = verbsOn();
+  return allCards().filter(c => missCount(c) > 0 && (c.type !== 'verb' || on[c.inf]))
+    .sort((a, b) => missCount(b) - missCount(a) || (b.stat[3] - a.stat[3]));
+}
+function sumDays(fromAgo, toAgo){
+  const out = { ms:0, n:0, r:[0,0,0,0], active:0 }, now = new Date();
+  for (let i = toAgo; i <= fromAgo; i++){
+    const d = state.stats.days[statKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - i))];
+    if (!d) continue;
+    out.ms += d.ms || 0; out.n += d.n || 0; for (let k = 0; k < 4; k++) out.r[k] += d.r[k] || 0;
+    if (d.ms > 0 || d.n > 0) out.active++;
+  }
+  return out;
+}
+function fmtDur(ms){
+  const m = Math.round(ms / 60000);
+  if (ms > 0 && m < 1) return '<1 min';
+  if (m < 60) return m + ' min';
+  const h = Math.floor(m / 60), r = m % 60;
+  return h + ' h' + (r ? ' ' + r + ' min' : '');
+}
+function mixOf(cards){
+  let known = 0, practising = 0, fresh = 0;
+  for (const c of cards){ if (c.status === 'new') fresh++; else if (isWeak(c)) practising++; else known++; }
+  return { known, practising, fresh, total:cards.length };
+}
+function mixRow(label, x){
+  const seg = (n, col) => x.total ? `<span style="width:${n / x.total * 100}%;background:${col}"></span>` : '';
+  return `<div class="mixrow">
+    <div class="mixhead"><b>${label}</b><span>${x.total}</span></div>
+    <div class="bar" aria-hidden="true">${seg(x.known,'var(--easy)')}${seg(x.practising,'var(--hard)')}${seg(x.fresh,'var(--ink-3)')}</div>
+    <div class="mixleg"><span><i style="background:var(--easy)"></i>${x.known} known</span><span><i style="background:var(--hard)"></i>${x.practising} practising</span><span><i style="background:var(--ink-3)"></i>${x.fresh} new</span></div>
+  </div>`;
+}
+function calendarHtml(){
+  const now = new Date(), base = new Date(now.getFullYear(), now.getMonth() + calOffset, 1);
+  const y = base.getFullYear(), mo = base.getMonth(), blanks = base.getDay(), days = new Date(y, mo + 1, 0).getDate();
+  const todayK = statKey(now);
+  let cells = '';
+  for (let i = 0; i < blanks; i++) cells += '<span></span>';
+  for (let d = 1; d <= days; d++){
+    const k = y + '-' + p2(mo + 1) + '-' + p2(d), st = state.stats.days[k];
+    cells += `<span class="cal-d${st && st.n > 0 ? ' did' : ''}${k === todayK ? ' today' : ''}">${d}</span>`;
+  }
+  const chev = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+  return `<div class="cal-head">
+      <button class="icon-btn" data-act="cal" data-d="-1" aria-label="Previous month">${chev('M15 6l-6 6 6 6')}</button>
+      <b>${base.toLocaleString('en-US', { month:'long', year:'numeric' })}</b>
+      <button class="icon-btn" data-act="cal" data-d="1" aria-label="Next month" ${calOffset >= 0 ? 'disabled' : ''}>${chev('M9 6l6 6-6 6')}</button>
+    </div>
+    <div class="cal-grid">${['S','M','T','W','T','F','S'].map(w => `<span class="cal-w">${w}</span>`).join('')}${cells}</div>`;
+}
+const PERIODS = [['Morning','5 am to noon'],['Afternoon','noon to 5 pm'],['Evening','5 to 10 pm'],['Night','10 pm to 5 am']];
+const WEEK_LABELS = ['This week','Last week','2 weeks ago','3 weeks ago','4 weeks ago','5 weeks ago'];
+
+function renderProgress(){
+  const T = state.stats.total, today = sumDays(0, 0), week = sumDays(6, 0), month = sumDays(29, 0);
+  const avg = month.active ? month.ms / month.active : 0;
+  const streak = streakNow(), best = Math.max(state.meta.best || 0, streak);
+  const hard = struggleList(), shown = hard.slice(0, 8), nPractise = Math.min(20, hard.length);
+  const verbCards = deckCards('verb');
+  const weeks = WEEK_LABELS.map((label, i) => { const x = sumDays(i * 7 + 6, i * 7); return { label, n:x.n, pct: x.n ? Math.round((x.r[0] + x.r[1]) / x.n * 100) : null }; });
+  const tp = [0,0,0,0,0,0,0,0];
+  for (const k in state.stats.days){ const d = state.stats.days[k]; if (d.tp) for (let i = 0; i < 8; i++) tp[i] += d.tp[i] || 0; }
+  const per = PERIODS.map(([name, span], i) => ({ name, span, n:tp[i * 2], pct: tp[i * 2] ? Math.round(tp[i * 2 + 1] / tp[i * 2] * 100) : null }));
+  const enough = per.filter(x => x.n >= 20);
+  const bestP = enough.length >= 2 ? enough.reduce((a, b) => b.pct > a.pct ? b : a) : null;
+  const wk = (label, small, pct) => `<div class="wk"><span>${label}${small ? `<small>${small}</small>` : ''}</span><span class="track"><i style="width:${pct || 0}%"></i></span><b>${pct == null ? '—' : pct + '%'}</b></div>`;
+  app.innerHTML = `
+    <h1 class="title">Progress</h1>
+    ${T.n === 0 ? '<p class="sub">Your numbers start building from your next session.</p>' : ''}
+    <div class="tiles">
+      <div class="tile"><b>${fmtDur(today.ms)}</b><span>Today</span></div>
+      <div class="tile"><b>${fmtDur(week.ms)}</b><span>This week</span></div>
+      <div class="tile"><b>${fmtDur(avg)}</b><span>Daily average</span></div>
+      <div class="tile"><b>${streak}</b><span>Day streak${best > streak ? ' · best ' + best : ''}</span></div>
+    </div>
+    <div class="panel">
+      <h2>Your cards</h2>
+      ${mixRow('Words', mixOf(deckCards('word')))}
+      ${verbCards.length ? mixRow('Verb forms', mixOf(verbCards)) : ''}
+      <p class="help">Known means your last answer was Easy.</p>
+    </div>
+    <div class="panel">
+      <h2>Words you miss most</h2>
+      ${shown.length ? `<div class="rows">${shown.map(c => `<div class="row"><span class="en">${esc(c.en)}</span><span class="es">${esc(c.es)}</span><span class="st due">Missed ${missCount(c)} of ${seenCount(c)}</span></div>`).join('')}</div>
+        <button class="btn-primary" style="margin-top:14px" data-act="practise-hard">Practise these (${nPractise})</button>`
+        : '<p class="help">Nothing yet. Cards you mark Hard or Wrong will show up here.</p>'}
+    </div>
+    <div class="panel">
+      <h2>Accuracy</h2>
+      ${weeks.map(w => wk(w.label, '', w.pct)).join('')}
+      <p class="help">Share of answers marked Easy or Medium.</p>
+    </div>
+    <div class="panel">
+      <h2>Practice days</h2>
+      ${calendarHtml()}
+    </div>
+    <div class="panel">
+      <h2>Best time of day</h2>
+      ${per.map(x => wk(x.name, x.span, x.pct)).join('')}
+      <p class="help">${bestP ? 'You do best in the <b>' + bestP.name.toLowerCase() + '</b>.' : 'Practise at different times of day and your best time will show up here.'}</p>
+    </div>
+    <p class="help" style="text-align:center">All time: ${fmtDur(T.ms)} · ${plural(T.n, 'card')} · ${plural(T.sess, 'session')}</p>`;
+}
+
 /* ---------- settings & backup ---------- */
 function renderSettings(){
   const s = state.settings;
@@ -1051,7 +1401,7 @@ function renderSettings(){
         <dt class="dt-hard">Hard</dt><dd>You barely got it. It comes back at the end of this session.</dd>
         <dt class="dt-wrong">Wrong</dt><dd>You missed it. It comes back twice more in this session and again next session, and its gap starts over.</dd>
       </dl>
-      <p class="help" style="margin-top:14px">A new session starts every time you tap Start new session. Each session shows your new words first, then words you last marked Wrong, Hard or Medium, then words you knew whose break is over, if there’s room. The order is shuffled every time. You’ve started ${plural(state.meta.session - 1,'session')} so far.</p>
+      <p class="help" style="margin-top:14px">A new session starts every time you tap Start new session. Each session shows your new words first, then words you last marked Wrong, Hard or Medium, then words you knew whose break is over, if there’s room. The order is shuffled every time. You’ve started ${plural(state.meta.session - 1,'word session')} and ${plural(state.meta.vsession || 0,'verb session')} so far.</p>
     </div>
     <div class="panel">
       <h2>Your data</h2>
@@ -1107,11 +1457,15 @@ document.addEventListener('click', e => {
   const act = t.dataset.act;
   if (act === 'sheet-bg'){ if (e.target === t) closeSheet(); return; }
   switch (act){
-    case 'size': state.settings.size = +t.dataset.n; showCustom = false; touch([]); render(); break;
+    case 'size': state.settings[sizeKey(homeDeck())] = +t.dataset.n; showCustom = false; touch([]); render(); break;
+    case 'deck': state.settings.deck = t.dataset.d === 'verb' ? 'verb' : 'word'; showCustom = false; includeAhead = false; touch([]); render(); break;
     case 'size-custom': showCustom = true; render(); { const i = document.getElementById('custom-n'); if (i) i.focus(); } break;
     case 'mode': state.settings.mode = t.dataset.m; touch([]); render(); break;
-    case 'start': startSession('normal'); break;
-    case 'start-ahead': startSession('ahead'); break;
+    case 'start': startSession('normal', homeDeck()); break;
+    case 'start-ahead': startSession('ahead', homeDeck()); break;
+    case 'practise-hard': startSession('struggle'); break;
+    case 'cal': calOffset = Math.min(0, calOffset + (+t.dataset.d)); render(); break;
+    case 'go-verbs': view = 'verbs'; render(); window.scrollTo(0,0); break;
     case 'reveal': reveal(); break;
     case 'check': doCheck(false); break;
     case 'dunno': doCheck(true); break;
@@ -1119,11 +1473,17 @@ document.addEventListener('click', e => {
     case 'undo': undo(); break;
     case 'speak': speak(state.cards[session.queue[session.idx]].es); break;
     case 'end': endSession(); break;
-    case 'done': view = session && session.deck === 'verb' ? 'verbs' : 'home'; session = null; render(); break;
-    case 'v-start': startSession('normal', 'verb'); break;
-    case 'v-start-ahead': startSession('ahead', 'verb'); break;
-    case 'vsize': state.settings.vsize = +t.dataset.n; showVCustom = false; touch([]); render(); break;
-    case 'vsize-custom': showVCustom = true; render(); { const i = document.getElementById('vcustom-n'); if (i) i.focus(); } break;
+    case 'done': view = (session && session.back) || 'home'; session = null; render(); break;
+    case 'verb-add': openVerbEditor(null); break;
+    case 'verb-edit': openVerbEditor(t.dataset.inf); break;
+    case 'verb-save': saveVerbEditor(); break;
+    case 'verb-delete':
+      openSheet(`<h2>Delete ${esc(t.dataset.inf)}?</h2><p class="help">The verb and its progress will be removed.</p>
+        <div class="btn-row"><button class="btn btn-danger" data-act="verb-delete-go" data-inf="${esc(t.dataset.inf)}">Delete verb</button><button class="btn" data-act="close-sheet">Keep it</button></div>`);
+      break;
+    case 'verb-delete-go': deleteCustomVerb(t.dataset.inf); closeSheet(); toast('Verb deleted'); render(); break;
+    case 'verb-paste': openVerbPaste(); break;
+    case 'vp-go': runVerbPaste(); break;
     case 'verb': openVerb(t.dataset.inf); break;
     case 'verb-toggle': toggleVerb(t.dataset.inf); break;
     case 'say': speak(t.dataset.t); break;
@@ -1154,14 +1514,17 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target.id === 'q'){ wordQuery = e.target.value; renderWordList(); }
   if (e.target.id === 'vq'){ verbQuery = e.target.value; renderVerbList(); }
-  if (e.target.id === 'vcustom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ state.settings.vsize = n; touch([]); const b = document.querySelector('#app .vline b'); if (b) b.textContent = plural(plan('normal', nextS('verb'), 'verb').length,'verb form'); } }
+  if (e.target.id === 'v-inf' || e.target.id === 'v-m') refreshVerbEditor(e.target.id === 'v-inf');
+  if (/^v-f\d$/.test(e.target.id)){ vedit.auto = false; refreshVerbEditor(false); }
+  if (e.target.id === 'vp-text'){ vimp.text = e.target.value; updateVerbPaste(); }
+  if (e.target.id === 'vp-on'){ vimp.on = e.target.checked; }
   if (e.target.dataset && e.target.dataset.person != null){
     const i = +e.target.dataset.person; let ps = persons().slice();
     if (e.target.checked){ if (!ps.includes(i)) ps.push(i); } else ps = ps.filter(x => x !== i);
     if (!ps.length){ e.target.checked = true; toast('Keep at least one form switched on.'); return; }
     state.settings.persons = ps.sort(); touch([]);
   }
-  if (e.target.id === 'custom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ state.settings.size = n; touch([]); const b = document.querySelector('#app .body b'); if (b){ const n2 = plan('normal', nextS()).length; b.textContent = plural(n2,'card'); } } }
+  if (e.target.id === 'custom-n'){ const n = parseInt(e.target.value, 10); if (n > 0 && n < 1000){ const deck = homeDeck(); state.settings[sizeKey(deck)] = n; touch([]); const b = document.querySelector('#app .bubble b'); if (b) b.textContent = unitOf(deck, plan('normal', nextS(deck), deck).length); } }
   if (e.target.id === 'inc-ahead'){ includeAhead = e.target.checked; render(); }
   if (e.target.id === 'imp-swap' && imp){ imp.swap = e.target.checked; renderImport(); }
   if (e.target.id === 'imp-studied' && imp){ imp.studied = e.target.checked; }
@@ -1187,7 +1550,12 @@ document.addEventListener('keydown', e => {
   if (!session.revealed && state.cards[session.queue[session.idx]] && state.cards[session.queue[session.idx]].status === 'new' && (e.key === ' ' || e.key === 'Enter')){ e.preventDefault(); reveal(); return; }
   if (session.revealed){ const r = { '1':'easy','2':'medium','3':'hard','4':'wrong' }[e.key]; if (r){ e.preventDefault(); rate(r); } }
 });
-document.addEventListener('visibilitychange', () => { if (!document.hidden && view === 'home') render(); });
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden){ tick(); tickAt = 0; saveLocal(); }
+  else if (view === 'review'){ tickAt = Date.now(); }
+  else if (view === 'home'){ render(); }
+});
+window.addEventListener('pagehide', () => { tick(); saveLocal(); });
 
 ensureVerbs();
 render();
